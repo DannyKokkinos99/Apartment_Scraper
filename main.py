@@ -13,7 +13,7 @@ import gspread
 # Bravis
 DATABASE = Path("database.db")
 QUERIES = Path("queries.sql")
-ROOMS = [2, 3]  # cannot be changed yet must make change to index in loop first
+ROOMS = [2, 3]
 CONDITIONS = ["dishwasher", "washing machine"]  #Maximum of 2 conditions
 CHECK_DATE = datetime(2024, 5, 1)  # Select Move in date
 SPREADSHEET_ID = "1v54j8oOHO9mchR_Akf05NE3WiLIEeosA9fnLOYQq3iw" #spreadsheet ID can be found in the url
