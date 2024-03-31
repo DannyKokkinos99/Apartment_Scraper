@@ -11,19 +11,21 @@ from bs4 import BeautifulSoup
 import gspread
 
 # Bravis
-DATABASE = Path("database.db")
-QUERIES = Path("queries.sql")
-ROOMS = [2, 3]
-CONDITIONS = ["dishwasher", "washing machine"]  #Maximum of 2 conditions
-CHECK_DATE = datetime(2024, 5, 1)  # Select Move in date
-SPREADSHEET_ID = "1v54j8oOHO9mchR_Akf05NE3WiLIEeosA9fnLOYQq3iw" #spreadsheet ID can be found in the url
-SERVICE_ACCOUNT = "service_account.json" #Service account token
-RENT = "https://www.bravis.cz/en/for-rent"
-BASE = "https://www.bravis.cz/en/"
-LISTINGS_PER_PAGE = 21 #number of listings per page
-BAD_AREAS = ["Zábrdovice"] #areas you want to exclude from your search
+def bravis():
+    
+    DATABASE = Path("database.db")
+    QUERIES = Path("queries.sql")
+    ROOMS = [2, 3]
+    CONDITIONS = ["dishwasher", "washing machine"]  #Maximum of 2 conditions
+    CHECK_DATE = datetime(2024, 5, 1)  # Select Move in date
+    SPREADSHEET_ID = "1v54j8oOHO9mchR_Akf05NE3WiLIEeosA9fnLOYQq3iw" #spreadsheet ID can be found in the url
+    SERVICE_ACCOUNT = "service_account.json" #Service account token
+    RENT = "https://www.bravis.cz/en/for-rent"
+    BASE = "https://www.bravis.cz/en/"
+    LISTINGS_PER_PAGE = 21 #number of listings per page
+    BAD_AREAS = ["Zábrdovice"] #areas you want to exclude from your search
 
-def main():
+
     """Does everything """
     # Connecting to database
     with open(
@@ -149,6 +151,21 @@ def main():
         print(f"{added_counter} new {n-1}-bedrooms apartments added to table.")
 
     conn.close()
+
+
+
+
+    response = requests.get(RENT)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, "html.parser")
+        html_content = soup.prettify()
+        with open('response_content.html', 'w', encoding="utf-8") as f:
+            # Write the HTML content to the file
+            f.write(html_content)
+
+        # print(number)
+
 if __name__ == "__main__":
-    main()
-    print("Process complete!")
+    # bravis()
+    sreality()
+    # print("Process complete!")
